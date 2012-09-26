@@ -1,9 +1,0 @@
-C:\Users\saed\Dropbox\Madrasa_Code\Current Code\Madrasa\Resources\bin\Debug\Resources.dll
-C:\Users\saed\Dropbox\Madrasa_Code\Current Code\Madrasa\Resources\bin\Debug\Resources.pdb
-C:\Users\saed\Dropbox\Madrasa_Code\Current Code\Madrasa\Resources\bin\Debug\he\Resources.resources.dll
-C:\Users\saed\Dropbox\Madrasa_Code\Current Code\Madrasa\Resources\obj\Debug\Resources.student.resources
-C:\Users\saed\Dropbox\Madrasa_Code\Current Code\Madrasa\Resources\obj\Debug\Resources.student.he.resources
-C:\Users\saed\Dropbox\Madrasa_Code\Current Code\Madrasa\Resources\obj\Debug\Resources.csproj.GenerateResource.Cache
-C:\Users\saed\Dropbox\Madrasa_Code\Current Code\Madrasa\Resources\obj\Debug\he\Resources.resources.dll
-C:\Users\saed\Dropbox\Madrasa_Code\Current Code\Madrasa\Resources\obj\Debug\Resources.dll
-C:\Users\saed\Dropbox\Madrasa_Code\Current Code\Madrasa\Resources\obj\Debug\Resources.pdb
