@@ -1,0 +1,25 @@
+﻿@model Madrasa.Models.SchoolAdmin
+
+@{
+    ViewBag.Title = "Details";
+}
+
+<h2>Details</h2>
+
+<fieldset>
+    <legend>SchoolAdmin</legend>
+
+    <div class="display-label">userId</div>
+    <div class="display-field">
+        @Html.DisplayFor(model => model.userId)
+    </div>
+
+    <div class="display-label">schoolId</div>
+    <div class="display-field">
+        @Html.DisplayFor(model => model.schoolId)
+    </div>
+</fieldset>
+<p>
+    @Html.ActionLink("Edit", "Edit", new { id=Model.ID }) |
+    @Html.ActionLink("Back to List", "Index")
+</p>

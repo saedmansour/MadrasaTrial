@@ -1,0 +1,280 @@
+﻿@model Madrasa.Models.CourseForView
+
+@{
+    ViewBag.Title = "Add Course ";
+}
+
+@*
+*@
+
+<script type="text/javascript">
+    var mainDivName = "AddQuestionDiv";
+    var InputDiv = "InputDiv";
+    var subjectIdInput = "subjectId";
+    var DefaultString = "General";
+    var Model = @Html.Raw(Json.Encode(ViewBag.subjects));
+</script>
+
+@* Function for adding radio button
+*@
+<script  type="text/javascript">
+    /*
+    * add space according to the level and new line if get true in the second parameter
+    */
+    function newLineAndSace(depth, ToAddNewLine) {
+        var str = "";
+        if (ToAddNewLine == true) {
+            str = "<br/>";
+        }
+        //no reason for choose 3
+        for (var i = 0; i < depth * 3; i++) {
+            str += "&nbsp";
+        }
+        return str;
+    }
+    /* 
+    * check if 2 list are equals , return true (1)
+    */
+    function isEqual(arr1, arr2) {
+        if (arr1.length != arr2.length) {
+            return false;
+        }
+        for (var i = 0; i < arr1.length; i++) {
+            if (arr1[i] != arr2[i]) {
+                return false;
+            }
+        }
+        return true;
+    }
+    /* 
+    *  Event when subject radio clicked
+    */
+    function copyArray(arrSource, arrDestenation) {
+        for (var i = 0; i < arrSource.length; i++) {
+            arrDestenation.push(arrSource[i]);
+        }
+    }
+    /* 
+    *  Event when subject radio clicked
+    *      create list of the checked subject and call addExistSubject
+    */
+    function EventClickedSubject(id) {
+        if (id == null) {
+            addExistSubject(mainDivName, [], null);
+            return;
+        }
+        //add input ID
+        document.getElementById(subjectIdInput).value = id;
+        for (var i = 0; i < Model.length; i++) {
+            if (Model[i].id == id) {
+                var subjectList = [];
+                //create array of the pressed subject
+                copyArray(Model[i].ancestorIdList, subjectList);
+                subjectList.push(Model[i].id);
+                //create the radios
+                addExistSubject(mainDivName, subjectList, Model[i].id);
+            }
+        }
+    }
+    /* 
+    *  add radio for div with groupName and text beside and  ID of checked Subject
+    */
+    function addRadio(divPtr, group, text, id, checked) {
+        var addChecked = "checked";
+        if (checked == false) {
+            addChecked = "";
+        }
+        divPtr.innerHTML += '<input type="radio"  onclick=EventClickedSubject(' + id + ') name="' + group + '"' + addChecked + '/>' + text;
+    }
+    /* 
+    *  add next Level of the subjects
+    *  GET the ID that need to mark it as checked.
+    */
+    function addNextSubjectLevelRadios(divPtr, subjectList, depth, idNeedToCheck) {
+        ////add new line and space for new level if its not first stage
+        if (depth != 0) {
+            divPtr.innerHTML += newLineAndSace(depth, true);
+        }
+        for (var j = 0; j < Model.length; j++) {
+            // print the stage by compare the sufix of IDLIST
+            if (isEqual(Model[j].ancestorIdList, subjectList)) {
+                var checked = false;
+                if (Model[j].id == idNeedToCheck) {
+                    checked = true;
+                }
+                addRadio(divPtr, "group" + depth, Model[j].title, Model[j].id, checked);
+            }
+        }
+    }
+    /* Main Function.
+    * add radio for the existing subject
+    */
+    function addExistSubject(div, idsList, id) {
+        var divPtr = document.getElementById(div);
+        divPtr.innerHTML = "";
+        var subjectList = [];
+        //add the the next level stage 
+        for (var i = 0; i < idsList.length + 1; i++) {
+            var subjectIdToCheck = "";
+            if (i < idsList.length) {
+                subjectIdToCheck = idsList[i];
+            }
+            //add next level and mark subjectIDToCheck as checked.
+            addNextSubjectLevelRadios(divPtr, subjectList, i, subjectIdToCheck);
+            //add radio for back , not include first level and last level
+            if (i != idsList.length && i != 0) {
+                var ancestorIdList = (i == 0) ? null : subjectList[subjectList.length - 1];
+                addRadio(divPtr, "group" + i, DefaultString, ancestorIdList, false);
+            }
+            //create next level list father
+            subjectList.push(idsList[i]);
+        }
+    }
+</script>
+
+<script>
+    //return subject ancestorIdList by id
+    function getAncestorIdListById(subjectId) {
+        for (var j = 0; j < Model.length; j++) {
+            if(Model[j].id == subjectId) {
+                return Model[j].ancestorIdList;
+            }
+        }
+        return null;
+    }
+    //return subject title by id
+    function getSubjectNameById(subjectId) {
+        for (var j = 0; j < Model.length; j++) {
+            if(Model[j].id == subjectId) {
+                return Model[j].title;
+            }
+        }
+        return null;
+    }
+    //create ful subject name
+    function getFulSubjectNameById(subjectId) {
+        var fulName = [];
+        var ancestorIdList = [];
+        copyArray(getAncestorIdListById(subjectId), ancestorIdList);
+        ancestorIdList.push(subjectId);
+        for (var i = 0; i < ancestorIdList.length; i++) {
+            for (var j = 0; j < Model.length; j++) {
+                if (Model[j].id == ancestorIdList[i]) {
+                    fulName.push(getSubjectNameById(ancestorIdList[i]));
+                }
+            }
+        }
+        return fulName;
+    }
+</script>
+
+<script>
+    //Event function : when checkbox checked. we add the checked Id
+    var DeleteList = [];
+    function addIdToDeleteList(id) {
+        //if ID exist in the list remove it from the list
+        for (var i = 0; i < DeleteList.length; i++) {
+            if (DeleteList[i] == id) {
+                DeleteList.pop(id);
+                return;
+            }
+        }
+        //if ID not exist add to delete list
+        DeleteList.push(id);
+    }
+    //delete checked list
+    function deleteCheckedList() {
+        for(var i=0;i<DeleteList.length;i++) {
+            var id = DeleteList.pop();
+            var tr = document.getElementById("tr"+id);
+            tr.parentNode.removeChild(tr);
+            //remove from subjectIdList
+            var index =$.inArray(""+id+"", subjectIdList);
+            //for remove index (start index, count)
+            subjectIdList.splice(index, 1);
+        }
+        
+    }
+    //Event when user checked
+    function eventChoosedData(id, inputId) {
+        var input = document.getElementById(inputId);
+        input.value = id;
+    }
+    // add subject name to the table
+    var subjectIdList = [];
+    function eventAddSubjectId(tableId) {
+        var table = document.getElementById(tableId);
+        var subjectId = document.getElementById("subjectId").value;
+        if (subjectId == -1 || $.inArray(subjectId, subjectIdList) != -1) {
+            return;
+        }
+        subjectIdList.push(subjectId);
+        var tr = document.createElement("tr");
+        tr.setAttribute("id","tr"+subjectId);
+        tr.innerHTML += '<td><input type="checkbox" onclick="addIdToDeleteList(' + subjectId + ')" /></td>';
+        tr.innerHTML += '<td>' + getFulSubjectNameById(subjectId) + '</td>';
+        table.appendChild(tr);
+    }
+</script>
+
+<script>
+    function sendSubjectIdList() {
+        for(var i = 0; i < subjectIdList.length ;i++) {
+            var div = document.getElementById('InputDiv');
+            var input = '<input type="hidden" name="subjectIdList[' + i + ']" value=' + subjectIdList[i] + '>';
+            div.innerHTML +=  input ;
+        }
+    }
+
+</script>
+@*
+*@
+<div style="direction: ltr">
+<h2>Add Course</h2>
+@using (Html.BeginForm())
+{
+    <div id="InputDiv">
+        <input type="hidden" id="subjectId"/>
+    </div>
+    <table>
+        <tr>
+            <td> @Html.LabelFor(model => model.Name)  </td>
+            <td> @Html.EditorFor(model => model.Name)</td>
+        </tr>
+        <tr>
+            <td>Choose Subject:</td>
+            <td><div id="AddQuestionDiv"></div></td>
+            
+        </tr>
+    </table>
+    <input type="button" onclick="eventAddSubjectId('subjectTable')" value="add selected subject to course"/>
+    <input type="button" onclick="deleteCheckedList()" value="Delete checked subject"/>
+    <br/>
+    <label >The Course Subject:</label>
+   <table id="subjectTable">
+        
+    </table>
+    
+    <br /><br/>
+    
+    <input type="submit" id="submitButton" value="Add new course" onclick="sendSubjectIdList()" />
+    
+   
+    
+   
+    
+    
+     <script type="text/javascript">
+         /*remove submit button if there are no data and print message*/
+         if (Model.length == 0) {
+             var message = "No subjects exists";
+             document.getElementById("submitButton").style.display = 'none';
+             document.getElementById(mainDivName).innerHTML = message;
+         }
+     </script>
+    <script type="text/javascript">
+        addExistSubject(mainDivName, [], null);
+    </script>
+    
+}
+</div>

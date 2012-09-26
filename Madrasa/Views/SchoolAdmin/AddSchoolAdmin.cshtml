@@ -1,0 +1,93 @@
+﻿@model Madrasa.Models.SchoolAdmin
+
+@{
+    ViewBag.Title = "AddSchoolAdmin";
+}
+<script>
+    var schoolIdsList = [];
+    //Event function : when checkbox checked. we add the checked Id
+    function eventAddIdToSchoolList(id) {
+        //if ID exist in the list remove it from the list
+        for (var i = 0; i < schoolIdsList.length; i++) {
+            if (schoolIdsList[i] == id) {
+                schoolIdsList.pop(id);
+                return;
+            }
+        }
+        //if ID not exist add to delete list
+        schoolIdsList.push(id)
+    }
+
+
+    //Event Function for sending schools id
+    function eventSendSchoolIdsList(inputId) {
+        var schoolList = json_encode(schoolIdsList);
+        document.getElementById(inputId).value = schoolList;
+    }
+
+    //Event when user checked
+    function eventChoosedUser(id,inputId) {
+        var input = document.getElementById(inputId);
+        input.value = id;
+    }
+
+</script>
+<h2>AddSchoolAdmin</h2>
+@using (Html.BeginForm())
+{
+    @* table of users and schools*@
+    <table>
+        <tr>
+            <th>Choose user</th>
+            <th>users</th>
+
+        </tr>
+        @foreach (var item in ViewBag.users)
+        {
+            <tr>
+                    <td><input type="radio" name="usersRadio" onclick="eventChoosedUser('@item.ID','userId')" /></td>
+                    <td> @item.userName</td>
+           </tr>
+        }
+    </table>
+    <br />
+    <table>
+        <tr>
+            <th>Choose schools</th>
+            <th>schools</th>
+
+        </tr>
+        @foreach (var item in ViewBag.schools)
+        {
+            <tr>
+                    <td><input type="checkbox" name="usersRadio" onclick="eventAddIdToSchoolList('@item.ID','schoolIdsList')" /></td>
+                    <td> @item.name</td>
+           </tr>
+        }
+    </table>
+    
+    <br />
+    <table>
+        <tr>
+            <th>Choose Role</th>
+            <th>Roles</th>
+
+        </tr>
+        @foreach (var item in ViewBag.roles)
+        {
+            <tr>
+                    <td><input type="radio" name="usersRadio" onclick="eventChoosedUser('@item.ID','role')" /></td>
+                    <td> @item.role</td>
+           </tr>
+        }
+    </table>
+    @* submit button*@
+        <input  type="submit" onclick="eventSendSchoolIdsList('schoolIdsList')"  value="Add admin user"/>
+    @* Input div *@
+    <div >
+        <input type="hidden" name="userId" id="userId" />
+        <input type="hidden" name="schoolIdsList" id="schoolIdsList" value="[]" />
+        <input type="hidden" name="role" id="role" value="[]" />
+    </div>
+    
+}
