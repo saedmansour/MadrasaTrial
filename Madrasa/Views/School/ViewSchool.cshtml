@@ -1,0 +1,77 @@
+﻿@model IEnumerable<Madrasa.Models.School>
+
+@{
+    ViewBag.Title = "ViewSchool";
+}
+
+<script type="text/javascript">
+    var DeleteList = [];
+    //Event function : when checkbox checked. we add the checked Id
+    function addIdToDeleteList(id) {
+        //if ID exist in the list remove it from the list
+        for (var i = 0; i < DeleteList.length; i++) {
+            if (DeleteList[i] == id) {
+                DeleteList.pop(id);
+                return;
+            }
+        }
+        //if ID not exist add to delete list
+        DeleteList.push(id)
+    }
+
+    //Event Function
+    function sendDeleteList() {
+        var list = json_encode(DeleteList);
+        document.getElementById("deleteIdsList").value = list;
+    }
+</script>
+<div style="direction:ltr">
+<h2>ViewSchool</h2>
+
+@using (Html.BeginForm()){
+    <input type="hidden" name="deleteIdsList" id="deleteIdsList" value="[]" />
+    <input  type="submit" onclick="sendDeleteList()"  value="Delete checked schools"/>
+    <table>
+        <tr>
+            <td></td>
+            <th>
+                name
+            </th>
+            <th>
+                country
+            </th>
+            <th>
+                city
+            </th>
+            <th>
+                language
+            </th>
+            <th></th>
+        </tr>
+
+    @foreach (var item in Model) {
+        <tr>
+            <td>
+                <input type="checkbox" onclick="addIdToDeleteList(@item.id )" />
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.name)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.country)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.city)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.language)
+            </td>
+            <td>
+                @Html.ActionLink("Edit", "Edit", new { id=item.id }) |
+            </td>
+        </tr>
+    }
+
+
+</table>
+}</div>

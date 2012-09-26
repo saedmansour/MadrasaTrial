@@ -1,0 +1,25 @@
+﻿@model Madrasa.Models.Subject
+
+@{
+    ViewBag.Title = "Details";
+}
+
+<h2>Details</h2>
+
+<fieldset>
+    <legend>Subject</legend>
+
+    <div class="display-label">titleList</div>
+    <div class="display-field">
+        @Html.DisplayFor(model => model.titleList)
+    </div>
+
+    <div class="display-label">ancestorsIds</div>
+    <div class="display-field">
+        @Html.DisplayFor(model => model.ancestorsIds)
+    </div>
+</fieldset>
+<p>
+    @Html.ActionLink("Edit", "Edit", new { id=Model.ID }) |
+    @Html.ActionLink("Back to List", "Index")
+</p>

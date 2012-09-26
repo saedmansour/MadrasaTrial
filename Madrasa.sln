@@ -1,0 +1,26 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 11.00
+# Visual Studio 2010
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Madrasa", "Madrasa\Madrasa.csproj", "{58BF3A14-4F33-4F18-89E2-DA1EAF533117}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Localization", "Resources\Localization.csproj", "{4E19B89A-0475-4B85-AF06-4906386BC1A0}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{58BF3A14-4F33-4F18-89E2-DA1EAF533117}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{58BF3A14-4F33-4F18-89E2-DA1EAF533117}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{58BF3A14-4F33-4F18-89E2-DA1EAF533117}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{58BF3A14-4F33-4F18-89E2-DA1EAF533117}.Release|Any CPU.Build.0 = Release|Any CPU
+		{4E19B89A-0475-4B85-AF06-4906386BC1A0}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{4E19B89A-0475-4B85-AF06-4906386BC1A0}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{4E19B89A-0475-4B85-AF06-4906386BC1A0}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{4E19B89A-0475-4B85-AF06-4906386BC1A0}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+EndGlobal
