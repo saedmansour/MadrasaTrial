@@ -1,0 +1,59 @@
+﻿@model Madrasa.Models.SchoolClass
+
+@{
+    ViewBag.Title = "Edit";
+}
+
+
+
+<script>
+    function eventSendData(item, id) {
+        document.getElementById(id).value = item.value;
+    }
+</script>
+
+<h2>Edit</h2>
+@using (Html.BeginForm())
+{
+    <input  type="hidden" name="schoolName" id="schoolName" value="@ViewBag.defaultSchool" />
+    <input  type="hidden" id="gradesValue" value="@ViewBag.defaulGrade" />
+     @Html.HiddenFor(model => model.ID)
+    <table>
+        <tr>
+            <th>
+                Insert Name
+            </th>
+            <td>
+                @Html.EditorFor(model => model.name)
+            </td>
+        </tr>
+        <tr>
+            <th>
+               choose grade
+            </th>
+            <td>
+                @Html.DropDownList("gradesList", (SelectList)ViewBag.grades, new { onchange = "eventSendData(this,'gradesValue')" })
+            </td>
+        </tr>
+        <tr>
+            <th>
+               choose school
+            </th>
+            <td>
+                @Html.DropDownList("SchoolList", (SelectList)ViewBag.schools, new { onchange = "eventSendData(this,'schoolName')" })
+            </td>
+        </tr>
+         <tr>
+            <th>
+                Insert studetnt number
+            </th>
+            <td>
+                @Html.EditorFor(model => model.studentNumber)
+            </td>
+        </tr>
+    </table>
+    <input type="submit" value="save" />
+<div>
+    @Html.ActionLink("Back to List", "Index")
+</div>
+}

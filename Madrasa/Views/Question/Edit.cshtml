@@ -1,0 +1,83 @@
+﻿@model Madrasa.Models.Question
+
+@{
+    ViewBag.Title = "Edit";
+}
+
+<h2>Edit</h2>
+
+<script src="@Url.Content("~/Scripts/jquery.validate.min.js")" type="text/javascript"></script>
+<script src="@Url.Content("~/Scripts/jquery.validate.unobtrusive.min.js")" type="text/javascript"></script>
+
+@using (Html.BeginForm()) {
+    @Html.ValidationSummary(true)
+    <fieldset>
+        <legend>Question</legend>
+
+        @Html.HiddenFor(model => model.ID)
+
+        <div class="editor-label">
+            @Html.LabelFor(model => model.subjectId)
+        </div>
+        <div class="editor-field">
+            @Html.EditorFor(model => model.subjectId)
+            @Html.ValidationMessageFor(model => model.subjectId)
+        </div>
+
+        <div class="editor-label">
+            @Html.LabelFor(model => model.questionHtml)
+        </div>
+        <div class="editor-field">
+            @Html.EditorFor(model => model.questionHtml)
+            @Html.ValidationMessageFor(model => model.questionHtml)
+        </div>
+
+        <div class="editor-label">
+            @Html.LabelFor(model => model.availableAnswers)
+        </div>
+        <div class="editor-field">
+            @Html.EditorFor(model => model.availableAnswers)
+            @Html.ValidationMessageFor(model => model.availableAnswers)
+        </div>
+
+        <div class="editor-label">
+            @Html.LabelFor(model => model.rightAnswer)
+        </div>
+        <div class="editor-field">
+            @Html.EditorFor(model => model.rightAnswer)
+            @Html.ValidationMessageFor(model => model.rightAnswer)
+        </div>
+
+        <div class="editor-label">
+            @Html.LabelFor(model => model.solution)
+        </div>
+        <div class="editor-field">
+            @Html.EditorFor(model => model.solution)
+            @Html.ValidationMessageFor(model => model.solution)
+        </div>
+
+        <div class="editor-label">
+            @Html.LabelFor(model => model.hint)
+        </div>
+        <div class="editor-field">
+            @Html.EditorFor(model => model.hint)
+            @Html.ValidationMessageFor(model => model.hint)
+        </div>
+
+        <div class="editor-label">
+            @Html.LabelFor(model => model.level)
+        </div>
+        <div class="editor-field">
+            @Html.EditorFor(model => model.level)
+            @Html.ValidationMessageFor(model => model.level)
+        </div>
+
+        <p>
+            <input type="submit" value="Save" />
+        </p>
+    </fieldset>
+}
+
+<div>
+    @Html.ActionLink("Back to List", "Index")
+</div>

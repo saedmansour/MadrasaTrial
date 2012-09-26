@@ -1,0 +1,54 @@
+﻿@model Madrasa.Models.SchoolClass
+
+@{
+    ViewBag.Title = "AddClass";
+}
+<script>
+    function eventSendData(item,id) {
+        document.getElementById(id).value = item.value;
+    }
+</script>
+<div style="direction:ltr">
+<h2>AddClass</h2>
+@using (Html.BeginForm())
+{
+    <input  type="hidden" name="schoolName" id="schoolName" value="@ViewBag.defaultSchool" />
+    <input  type="hidden" name="grade" id="grade" value="@ViewBag.defaultGrade" />
+    <table>
+        <tr>
+            <th>
+                Insert Name
+            </th>
+            <td>
+                @Html.EditorFor(model => model.name)
+            </td>
+        </tr>
+        <tr>
+            <th>
+               choose grade
+            </th>
+            <td>
+                @Html.DropDownList("gradesList", (SelectList)ViewBag.grades, new { onchange = "eventSendData(this,'grade')" })
+            </td>
+        </tr>
+        <tr>
+            <th>
+               choose school
+            </th>
+            <td>
+                @Html.DropDownList("SchoolList", (SelectList)ViewBag.schools, new { onchange = "eventSendData(this,'schoolName')" })
+            </td>
+        </tr>
+         <tr>
+            <th>
+                Insert studetnt number
+            </th>
+            <td>
+                @Html.EditorFor(model => model.studentNumber)
+            </td>
+        </tr>
+    </table>
+    
+    <input type="submit" value="add school" />
+}
+</div>

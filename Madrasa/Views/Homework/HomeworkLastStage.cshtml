@@ -1,0 +1,41 @@
+﻿@using Madrasa.Models
+@{
+    ViewBag.Title = "HomeWorkLastStage";
+    Question question = ViewBag.question;
+    //HomeworkState state = ViewBag.nextState;
+}
+
+<script type="text/javascript">
+    function showSolution(button, solutionId, nextId) 
+    {
+        document.getElementById(solutionId).style.visibility    = '';
+        document.getElementById(nextId).style.visibility        = '';
+        button.style.visibility                                 = 'hidden';    
+    }
+</script>
+
+
+@using (Html.BeginForm())
+{
+    @Html.Partial("_HomeworkStateData");
+                                            
+    <div id="question">
+        @*View Question*@
+        <div>
+                @question.questionHtml
+        </div> 
+    
+        <div id="solutionId" style="visibility:hidden">
+               @Localization.student.correctAnswer : @question.correctAnswerNum
+            <br />
+               @Localization.student.solution :      @question.solution
+        </div>                       
+    
+        <div id="user_answer">
+            @Html.TextBox("userAnswer")
+        </div>   
+    
+        <input style="margin-top: 10px;" type="button"  value="@Localization.student.checkSolution" onclick="showSolution(this,'solutionId','next_question_button')" /><br />
+        <button type="submit" id="next_question_button" onclick="showSolution('solutionId')" style="margin-top: 10px; visibility:hidden" />
+    </div>                                                       
+}

@@ -1,0 +1,377 @@
+﻿
+/* --------------------------------------------------------------------------------------- 
+	General
+   --------------------------------------------------------------------------------------- */
+
+
+
+/* --------------------------------------------------------------------------------------- 
+	Classes
+   --------------------------------------------------------------------------------------- */
+
+.page_content 
+{
+    margin-right: 80px;
+    margin-top: 40px;
+}
+
+.icon:hover {
+	opacity: 0.6;
+	cursor: pointer;
+}
+
+.seperator 
+{
+	background:#EFEFEF; 
+}
+
+.button 
+{
+	width: 100px;
+	background: lightgrey;
+	text-decoration:none;
+	margin-right: 20px;
+	padding: 10px 33px;
+	color: #282828 ;
+	font-size: 18px;
+	font-family: Helvetica, Arial, Sans-Serif;
+	margin-right: 10px;
+	text-decoration: none;
+	vertical-align: middle;
+	cursor: pointer;
+	direction: rtl;
+}
+.button:hover {
+	border-top-color: #575859;
+	background: #575859;
+	color: #e0d7e0;
+	cursor: pointer;
+}
+
+
+
+
+/* --------------------------------------------------------------------------------------- 
+	IDs
+   --------------------------------------------------------------------------------------- */
+   
+#main_content {
+	position: relative;
+	top: 120px;
+}
+
+#logo 
+{
+	position: absolute;
+	right: 16px; top: 7px;
+	float: right;
+	height: 90px; width: auto;
+}
+
+#icon_logout {
+	position: absolute;
+	left: 50px; top: 33px;
+	height: 40px; width:auto;
+}
+
+#icon_competition {
+	position: absolute;
+	left: 100px; top: 20px;
+	height: 60px; width:auto;
+}
+
+#icon_report {
+	position: absolute;
+	left: 170px; top: 20px;
+	height: 60px; width:auto;
+}
+
+#seperator_header_main {
+	position: absolute;
+	top:101px;
+	left:0px;
+	height:7px;
+	min-width:100%; 
+}
+
+
+/* --------------------------------------------------------------------------------------- 
+	"Homework.css"
+   --------------------------------------------------------------------------------------- */
+   
+#question 
+{
+	position: absolute;
+	right: 100px;
+	top: 60px;
+}
+
+#question_html 
+{
+	position: relative;
+}
+
+#user_answer
+{
+	position: relative;
+	margin-top: 20px;
+}
+
+.margin_from_top 
+{
+	margin-top: 30px;
+}
+
+#next_question_button
+{
+	margin-top: 30px;
+	background-image: url("../../content/images/arrow_left_2.png");
+	background-color: transparent;
+	border: 0px;
+	height: 50px;
+	width: 65px;
+}
+
+
+
+
+body {
+	font-family: tahoma;
+	font-size: 12px;
+	direction: rtl;
+	background: white;
+}
+
+
+.date {
+	direction: ltr;    
+}
+
+a {
+	text-decoration: none;
+	color: #575859;
+}
+
+a img{
+	border:0;
+}
+
+button {
+	font-family: times;
+	font-weight: bold;
+	font-size: 16px;
+	padding: 5px 15px 5px 15px;
+	background: #EFEFEF;
+	border: 0px;
+	margin: 5px;
+	cursor: pointer;
+}
+
+button:hover {
+	background: lightgrey;
+}
+
+table {
+	margin: 10px;
+	border:2px solid #EFEFEF;
+}
+
+td {
+	text-align: center;
+	margin: 10px;
+	padding: 10px;
+}
+
+caption {
+	border:2px solid #EFEFEF;
+	border-bottom: none;
+	font-weight: bold;
+	font-size: 16px;
+	font-family: times;
+	padding: 10px;
+}
+
+
+fieldset { 
+	margin: 10px;
+	width: 600px; 
+	border:2px solid #EFEFEF;
+}
+
+legend {
+	border:2px solid #EFEFEF;
+	padding: 0.2em 0.2em;
+}
+
+h1, h2, h3, h4, h5, h6 {
+	font-family: arial;
+}
+
+.h1, h1 { font-size: 36px; }
+.h2, h2 { font-size: 32px; }
+.h3, h3 { font-size: 28px; }
+.h4, h4 { font-size: 24px; }
+.h5, h5 { font-size: 20px; }
+.h6, h6 { font-size: 16px; }
+
+
+p {
+	font-family: tahoma;
+}
+
+hr {
+	width: 90%;
+	background-color: #EFEFEF;
+	border: 0;
+	height: 2px;
+}
+
+#logo {
+	height: 90px; 
+	cursor: pointer;
+}
+
+#logout_icon {
+	height: 40px;
+}
+
+.toolbar_icon {
+	height: 50px;
+}
+
+.toolbar_icon:hover {
+	opacity: 0.6;
+	cursor: pointer;
+}
+
+.seperated_title {
+	padding-top: 20px;
+	padding-bottom: 20px;
+}
+
+.content_box{
+	background-color: #EFEFEF;
+	margin: 10px;
+	padding: 40px;
+	display: inline-block;
+	text-align: center;
+}
+
+.content_box_1{
+	padding: 90px;
+}
+
+.content_box_2{
+	padding-left: 90px;
+	padding-right: 90px;
+}
+
+.bar 
+{
+	background:#EFEFEF; 
+}
+
+.bar_horizontal_long {
+	height:7px;
+	width: 100%;
+}
+
+.bar_vertical_long {
+	width:7px;
+	height: 700px;
+}
+
+.bar_horizontal_1 {
+	width:330px; 
+	height:7px;
+}
+
+.bar_vertical_1 {
+	height:330px; 
+	width:7px;
+}
+
+.bar_horizontal_2  {
+	width:600px; 
+	height: 2px
+}
+
+.bar_vertical_2  {
+	height:400px; 
+	width: 2px
+}
+
+.layout_two_columns {
+	background: #EFEFEF;
+	display: inline-block;
+	width: 500px;
+	height: 110px;
+	text-align: center;
+	display: table-cell;
+	vertical-align: middle;
+}
+
+.column_left {
+	float: left;
+	display: inline;
+	vertical-align: text-top;
+	width: 250px;
+}
+
+.column_right {
+	display: inline;
+	float: right;
+	width: 250px;
+}
+
+.navigation {
+	margin: 10px;
+}
+
+.navigation img {
+	height: 50px;
+	margin: 2px;
+}
+
+.navigation img:hover {
+	opacity: 0.6;
+	cursor: pointer;
+}
+
+#subjects img {
+	max-width: 120px;
+	max-height: 100px;
+}
+
+.column_right img {
+	max-width: 120px;
+	max-height: 100px;
+}
+
+ol.subject_collection {
+	list-style: none;
+}
+ol.subject_collection li {
+	padding-top: 10px;
+}
+
+/* This parent can be any width and height */
+.container {
+  text-align: center;
+}
+ 
+/* The ghost, nudged to maintain perfect centering */
+.container:before {
+  content: '';
+  display: inline-block;
+  height: 100%;
+  vertical-align: middle;
+  margin-right: -0.25em; /* Adjusts for spacing */
+}
+
+/* The element to be centered, can
+   also be of any width and height */ 
+.centered {
+  display: inline-block;
+  vertical-align: middle;
+}

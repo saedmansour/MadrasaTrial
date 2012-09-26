@@ -1,0 +1,125 @@
+﻿@model IEnumerable<Madrasa.Models.CourseForView>
+@{
+    ViewBag.Title = "Edit";
+}
+<script type="text/javascript">
+    var Model = @Html.Raw(Json.Encode(ViewBag.subjects));
+</script>
+
+
+<script>
+    /* 
+    *  copyArray
+    */
+    function copyArray(arrSource, arrDestenation) {
+        for (var i = 0; i < arrSource.length; i++) {
+            arrDestenation.push(arrSource[i]);
+        }
+    }
+</script>
+
+<script>
+    //return subject ancestorIdList by id
+    function getAncestorIdListById(subjectId) {
+        for (var j = 0; j < Model.length; j++) {
+            if (Model[j].id == subjectId) {
+                return Model[j].ancestorIdList;
+            }
+        }
+        return null;
+    }
+    //return subject title by id
+    function getSubjectNameById(subjectId) {
+        for (var j = 0; j < Model.length; j++) {
+            if (Model[j].id == subjectId) {
+                return Model[j].title;
+            }
+        }
+        return null;
+    }
+    //create ful subject name
+    function getFullSubjectNameById(subjectId) {
+        var fullName = [];
+        var ancestorIdList = [];
+        copyArray(getAncestorIdListById(subjectId), ancestorIdList);
+        ancestorIdList.push(subjectId);
+        for (var i = 0; i < ancestorIdList.length; i++) {
+            for (var j = 0; j < Model.length; j++) {
+                if (Model[j].id == ancestorIdList[i]) {
+                    fullName.push(getSubjectNameById(ancestorIdList[i]));
+                }
+            }
+        }
+        return fullName;
+    }
+    //
+    function printSubjectName(subjectId) {
+        document.write(getFullSubjectNameById(subjectId));
+    }
+
+    //Event function : when checkbox checked. we add the checked Id
+    var DeleteList = [];
+    function addIdToDeleteList(id) {
+        //if ID exist in the list remove it from the list
+        for (var i = 0; i < DeleteList.length; i++) {
+            if (DeleteList[i] == id) {
+                DeleteList.pop(id);
+                return;
+            }
+        }
+        //if ID not exist add to delete list
+        DeleteList.push(id);
+    }
+
+    //
+    //sendDeleteList
+    function sendDeleteList(input) {
+        var div = document.getElementById(input);
+        div.innerHTML = "";
+        for(var i=0;i<DeleteList.length;i++) {
+            div.innerHTML += '<input type="hidden" name="deleteIdsList[' + i + ']"  value="'+DeleteList[i]+'" />';
+        } 
+    }
+    
+</script>
+
+<div style="direction: ltr">
+    <h2>Edit</h2>
+    @using (Html.BeginForm())
+    {
+        
+        <div id="InputDiv">
+            <input type="hidden" name="deleteIdsList"  value="[]" />
+           
+        </div>
+         <input  type="submit" name="DeleteCourses" onclick="sendDeleteList('InputDiv')"  value="Delete checked courses"/>
+        <table id = "tableId">
+            <tr>
+                <td></td>
+                <th>
+                    Name
+                </th>
+                <th>
+                    Subject list
+                </th>
+            </tr>
+
+            @foreach (var item in Model)
+            {
+                <tr>
+                    <td>
+                        <input type="checkbox" onclick="addIdToDeleteList(@item.Id)" />
+                    </td>
+                    <td>@item.Name</td>
+                    <td>
+                        @foreach (var subjectId in item.SubjectIdList)
+                        {
+                            <br/>
+                            <script > printSubjectName(@subjectId)</script>
+                        }
+                    </td>
+                </tr>
+            }
+        </table>
+    }
+</div>

@@ -1,0 +1,69 @@
+﻿@model Madrasa.Models.Role
+
+@{
+    ViewBag.Title = "AddRemoveRole";
+}
+
+<h2>AddRemoveRole</h2>
+
+<script type="text/javascript">
+    var DeleteList = [];
+    //Event function : when checkbox checked. we add the checked Id
+    function addIdToDeleteList(id) {
+        //if ID exist in the list remove it from the list
+        for (var i = 0; i < DeleteList.length; i++) {
+            if (DeleteList[i] == id) {
+                DeleteList.pop(id);
+                return;
+            }
+        }
+        //if ID not exist add to delete list
+        DeleteList.push(id)
+    }
+
+    //Event Function
+    function sendDeleteList() {
+        var list = json_encode(DeleteList);
+        document.getElementById("deleteIdsList").value = list;
+    }
+</script>
+<div style="direction:ltr">
+@using (Html.BeginForm())
+{
+    <input type="hidden" name="deleteIdsList" id="deleteIdsList" value="[]" />
+    
+    <table>
+        <tr>
+            <th>check for delete role</th>
+            <th>
+                role
+            </th>
+            <th></th>
+        </tr>
+
+    @foreach (var item in ViewBag.roles)
+    {
+        <tr>
+            <td>
+                 <input type="checkbox" onclick="addIdToDeleteList(@item.id )" />
+            </td>
+            <td>
+                @item.role
+            </td>
+            <td>
+                @Html.ActionLink("Edit", "Edit", new { id = item.id  })
+            </td>
+        </tr>
+    }
+    </table>
+    <br /><br />
+    <table>
+        <tr><td></td> <th> role</th></tr>
+        <tr>
+            <td>Add new Role</td>
+            <td>@Html.EditorFor(model => model.role)</td>
+        </tr>
+    </table>
+    <input  type="submit" onclick="sendDeleteList()"  value="Save"/>
+}
+</div>
