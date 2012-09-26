@@ -1,0 +1,286 @@
+﻿@model IEnumerable<Madrasa.Models.Material>
+@{
+    ViewBag.Title = "ViewQuestion";
+}
+
+
+<script type="text/javascript">
+    var mainDivName = "ViewMaterialDiv";
+    var subjectIdInput = "subjectId";
+    var DefaultString = "General";
+    var DeleteList = [];
+    //id for the table to hide not used rows.
+    var tableId = "tableId";
+    var Model = @Html.Raw(Json.Encode(ViewBag.subjects));
+    var materialModel= @Html.Raw(Json.Encode(Model));
+</script>
+
+@* Function for adding radio button
+*@
+<script  type="text/javascript">
+    /*
+    * add space according to the level and new line if get true in the second parameter
+    */
+    function newLineAndSace(depth, ToAddNewLine) {
+        var str = "";
+        if (ToAddNewLine == true) {
+            str = "<br/>";
+        }
+        //no reason for choose 3
+        for (var i = 0; i < depth * 3; i++) {
+            str += "&nbsp";
+        }
+        return str;
+    }
+    /* 
+    * check if 2 list are equals , return true (1)
+    */
+    function isEqual(arr1, arr2) {
+        if (arr1.length != arr2.length) {
+            return false;
+        }
+        for (var i = 0; i < arr1.length; i++) {
+            if (arr1[i] != arr2[i]) {
+                return false;
+            }
+        }
+        return true;
+    }
+    /* 
+    * check if 2 lists: source contain the destentaion , return true (1)
+    */
+    function isContain(source, destentaion) {
+        if (source.length < destentaion.length) {
+            return false;
+        }
+        for (var i = 0; i < destentaion.length; i++) {
+            if (source[i] != destentaion[i]) {
+                return false;
+            }
+        }
+        return true;
+    }
+    /* 
+    *  Event when subject radio clicked
+    */
+    function copyArray(arrSource, arrDestenation) {
+        for (var i = 0; i < arrSource.length; i++) {
+            arrDestenation.push(arrSource[i]);
+        }
+    }
+    /* 
+    *  Event when subject radio clicked
+    *      create list of the checked subject and call addExistSubject
+    */
+    function EventClickedSubject(id) {
+        if (id == null) {
+            addExistSubject(mainDivName, [], null);
+            return;
+        }
+        //add input ID
+        document.getElementById(subjectIdInput).value = id;
+        for (var i = 0; i < Model.length; i++) {
+            if (Model[i].id == id) {
+                var subjectList = [];
+                //create array of the pressed subject
+                copyArray(Model[i].ancestorIdList, subjectList);
+                subjectList.push(Model[i].id);
+                //create the radios
+                addExistSubject(mainDivName, subjectList, Model[i].id);
+            }
+        }
+    }
+    /* 
+    *  add radio for div with groupName and text beside and  ID of checked Subject
+    */
+    function addRadio(divPtr, group, text, id, checked) {
+        var addChecked = "checked";
+        if (checked == false) {
+            addChecked = "";
+        }
+        divPtr.innerHTML += '<input type="radio"  onclick=EventClickedSubject(' + id + ') name="' + group + '"' + addChecked + '/>' + text;
+    }
+
+    /* 
+    *  get ancestorsIdOf subject with id=id
+    *  
+    */
+    function getAncestorsIds(id) {
+        for (var j = 0; j < Model.length; j++) {
+            if (Model[j].id == id) {
+                return Model[j].ancestorIdList;
+            }
+        }
+        return null;
+    }
+    /* 
+    *  add next Level of the subjects
+    *  GET the ID that need to mark it as checked.
+    */
+    function addNextSubjectLevelRadios(divPtr, subjectList, depth, idNeedToCheck) {
+        ////add new line and space for new level if its not first stage
+        if (depth != 0) {
+            divPtr.innerHTML += newLineAndSace(depth, true);
+        }
+        for (var j = 0; j < Model.length; j++) {
+            // print the stage by compare the sufix of IDLIST
+            if (isEqual(Model[j].ancestorIdList, subjectList)) {
+                var checked = false;
+                if (Model[j].id == idNeedToCheck) {
+                    checked = true;
+                }
+                addRadio(divPtr, "group" + depth, Model[j].title, Model[j].id, checked);
+            }
+        }
+    }
+    /* Main Function.
+    * add radio for the existing subject
+    */
+    function addExistSubject(div, idsList, id) {
+        var divPtr = document.getElementById(div);
+        divPtr.innerHTML = "";
+        var subjectList = [];
+        //add the the next level stage 
+        for (var i = 0; i < idsList.length + 1; i++) {
+            var subjectIdToCheck = "";
+            if (i < idsList.length) {
+                subjectIdToCheck = idsList[i];
+            }
+            //add next level and mark subjectIDToCheck as checked.
+            addNextSubjectLevelRadios(divPtr, subjectList, i, subjectIdToCheck);
+            //add radio for back , not include first level and last level
+            if (i != idsList.length && i != 0) {
+                var ancestorIdList = (i == 0) ? null : subjectList[subjectList.length - 1];
+                addRadio(divPtr, "group" + i, DefaultString, ancestorIdList, false);
+            }
+            //create next level list father
+            subjectList.push(idsList[i]);
+        }
+        hideUnusedRow(idsList);
+    }
+   
+</script>
+
+<script>
+
+    function getMaterialById(id) {
+        for (var j = 0; j < materialModel.length; j++) {
+            if (materialModel[j].id == id) {
+                return materialModel[j];
+            }
+        }
+        return null;
+    }
+
+
+    // hideUnusedRow : View choosed subject questions
+    // every question have two row  with ids: tr1Id.,tr2Id.
+    function hideUnusedRow(idsList) {
+        if (idsList.length == 0)
+            return;
+        //get the table
+        var table = document.getElementById(tableId);
+        //get all the table rows
+        var trs = table.getElementsByTagName("tr");
+        var id;
+        //first row use for titles
+        for (var i = 1; i < trs.length; i++) {
+            //get question Id
+            if (trs[i].id.indexOf("tr1Id.") != -1) {
+                id = trs[i].id.split("tr1Id.")[1];
+            }
+            else
+                continue;
+            //get ancestorID
+            var material = getMaterialById(id);
+            var ancestorIdList = getAncestorsIds(material.subjectId);
+            var choosedSubject = idsList[idsList.length - 1];
+            //check if the question subject is one of subject choosed and view if true;
+            if (isContain(ancestorIdList, idsList) || material.subjectId == choosedSubject) {
+                trs[i].style.visibility = '';
+                continue;
+            }
+            trs[i].style.visibility = 'hidden';
+        }
+        return;
+    }
+
+
+</script>
+
+
+<script type="text/javascript">
+    //Event function : when checkbox checked. we add the checked Id
+    function addIdToDeleteList(id) {
+        //if ID exist in the list remove it from the list
+        for (var i = 0; i < DeleteList.length; i++) {
+            if (DeleteList[i] == id) {
+                DeleteList.pop(id);
+                return;
+            }
+        }
+        //if ID not exist add to delete list
+        DeleteList.push(id)
+    }
+
+    //Event Function
+    function sendDeleteList() {
+        var list = json_encode(DeleteList);
+        document.getElementById("deleteIdsList").value = list;
+    }
+</script>
+<div style="direction:ltr">
+<h2>ViewQuestion</h2>
+@using (Html.BeginForm())
+{
+    <table>
+        <tr>
+            <td>Choose subject:</td>
+            <td>
+                <div id="ViewMaterialDiv"></div>
+            </td>
+        </tr>
+    </table>
+    <br />
+    <div id="InputDiv">
+        <input type="hidden" name="subjectId" id="subjectId" value="" />
+        <input type="hidden" name="availableAnswers" id="availableAnswers" value="" />
+        <input type="hidden" name="imagesUrl" id="imagesUrl" value="" />
+        <input type="hidden" name="videosUrl" id="videosUrl" value="" />
+        <input type="hidden" name="deleteIdsList" id="deleteIdsList" value="[]" />
+    </div>
+    <input  type="submit" onclick="sendDeleteList()"  value="Delete checked Material"/>
+    <table id = "tableId">
+        <tr>
+            <td></td>
+            <th>
+                material
+            </th>
+        </tr>
+
+    @foreach (var item in Model)
+    {
+        <tr id="tr1Id.@item.id">
+            <td>
+                <input type="checkbox" onclick="addIdToDeleteList(@item.id )" />
+            </td>
+            <td >
+                @Html.DisplayFor(modelItem => item.html)
+            </td>
+        </tr>
+    }
+    </table>
+    <script type="text/javascript">
+        /*remove submit button if there are no data and print message*/
+        if (Model.length == 0) {
+            var message = "No subjects exists";
+            document.getElementById("submitButton").style.display = 'none';
+            document.getElementById(mainDivName).innerHTML = message;
+        }
+    </script>
+       <script type="text/javascript">
+           addExistSubject(mainDivName, [], null);
+
+    </script>
+}
+</div>

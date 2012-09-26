@@ -1,0 +1,55 @@
+﻿@model Madrasa.Models.Question
+
+@{
+    ViewBag.Title = "Details";
+}
+
+<h2>Details</h2>
+
+<fieldset>
+    <legend>Question</legend>
+
+    <div class="display-label">subjectId</div>
+    <div class="display-field">
+        @Html.DisplayFor(model => model.subjectId)
+    </div>
+
+    <div class="display-label">question</div>
+    <div class="display-field">
+        @Html.DisplayFor(model => model.questionHtml)
+    </div>
+
+    <div class="display-label">availableAnswers</div>
+    <div class="display-field">
+        @Html.DisplayFor(model => model.availableAnswers)
+    </div>
+
+    <div class="display-label">rightAnswer</div>
+    <div class="display-field">
+        @Html.DisplayFor(model => model.rightAnswer)
+    </div>
+
+    <div class="display-label">solution</div>
+    <div class="display-field">
+        @Html.DisplayFor(model => model.solution)
+    </div>
+
+    <div class="display-label">hint</div>
+    <div class="display-field">
+        @Html.DisplayFor(model => model.hint)
+    </div>
+
+    <div class="display-label">imagesUrl</div>
+    <div class="display-field">
+        @Html.DisplayFor(model => model.imagesUrl)
+    </div>
+
+    <div class="display-label">videosUrl</div>
+    <div class="display-field">
+        @Html.DisplayFor(model => model.videosUrl)
+    </div>
+</fieldset>
+<p>
+    @Html.ActionLink("Edit", "Edit", new { id=Model.ID }) |
+    @Html.ActionLink("Back to List", "Index")
+</p>
