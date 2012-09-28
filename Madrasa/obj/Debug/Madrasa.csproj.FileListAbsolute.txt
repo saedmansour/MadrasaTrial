@@ -32,3 +32,13 @@ C:\Users\hassan\Dropbox\startUp\madrasa_ver1\Current Code\Madrasa\Madrasa\bin\he
 C:\Users\hassan\Dropbox\startUp\madrasa_ver1\Current Code\Madrasa\Madrasa\obj\Debug\ResolveAssemblyReference.cache
 C:\Users\hassan\Dropbox\startUp\madrasa_ver1\Current Code\Madrasa\Madrasa\obj\Debug\Madrasa.dll
 C:\Users\hassan\Dropbox\startUp\madrasa_ver1\Current Code\Madrasa\Madrasa\obj\Debug\Madrasa.pdb
+C:\Users\saed\Desktop\MadrasaTrial\Madrasa\bin\Madrasa.dll
+C:\Users\saed\Desktop\MadrasaTrial\Madrasa\bin\Madrasa.pdb
+C:\Users\saed\Desktop\MadrasaTrial\Madrasa\bin\EntityFramework.dll
+C:\Users\saed\Desktop\MadrasaTrial\Madrasa\bin\Resources.dll
+C:\Users\saed\Desktop\MadrasaTrial\Madrasa\bin\Resources.pdb
+C:\Users\saed\Desktop\MadrasaTrial\Madrasa\bin\EntityFramework.xml
+C:\Users\saed\Desktop\MadrasaTrial\Madrasa\bin\he\Resources.resources.dll
+C:\Users\saed\Desktop\MadrasaTrial\Madrasa\obj\Debug\Madrasa.csprojResolveAssemblyReference.cache
+C:\Users\saed\Desktop\MadrasaTrial\Madrasa\obj\Debug\Madrasa.dll
+C:\Users\saed\Desktop\MadrasaTrial\Madrasa\obj\Debug\Madrasa.pdb
