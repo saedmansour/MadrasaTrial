@@ -74,6 +74,7 @@ namespace Madrasa
             //
             //
             // On model change, reset databases.
+            /*
             Database.SetInitializer<HomeworkDbContext>(new DropCreateDatabaseIfModelChanges<HomeworkDbContext>());
             Database.SetInitializer<SubjectDbContext>(new DropCreateDatabaseIfModelChanges<SubjectDbContext>());
             Database.SetInitializer<AdminDbContext>(new DropCreateDatabaseIfModelChanges<AdminDbContext>());
@@ -89,6 +90,25 @@ namespace Madrasa
             Database.SetInitializer<CourseDbContext>(new DropCreateDatabaseIfModelChanges<CourseDbContext>());
             Database.SetInitializer<CourseRegistrationDbContext>(new DropCreateDatabaseIfModelChanges<CourseRegistrationDbContext>());
             Database.SetInitializer<HomeworkStateDbContext>(new DropCreateDatabaseIfModelChanges<HomeworkStateDbContext>());
+              */
+
+            /*
+            Database.SetInitializer<HomeworkDbContext>(new Devtalk.EF.CodeFirst.DontDropDbJustCreateTablesIfModelChanged<HomeworkDbContext>());
+            Database.SetInitializer<SubjectDbContext>(new Devtalk.EF.CodeFirst.DontDropDbJustCreateTablesIfModelChanged<SubjectDbContext>());
+            Database.SetInitializer<AdminDbContext>(new Devtalk.EF.CodeFirst.DontDropDbJustCreateTablesIfModelChanged<AdminDbContext>());
+            Database.SetInitializer<HomeWorkQuestionDbContext>(new Devtalk.EF.CodeFirst.DontDropDbJustCreateTablesIfModelChanged<HomeWorkQuestionDbContext>());
+            Database.SetInitializer<HomeworkSolvedDbContext>(new Devtalk.EF.CodeFirst.DontDropDbJustCreateTablesIfModelChanged<HomeworkSolvedDbContext>());
+            Database.SetInitializer<MaterialDbContext>(new Devtalk.EF.CodeFirst.DontDropDbJustCreateTablesIfModelChanged<MaterialDbContext>());
+            Database.SetInitializer<QuestionDbContext>(new Devtalk.EF.CodeFirst.DontDropDbJustCreateTablesIfModelChanged<QuestionDbContext>());
+            Database.SetInitializer<RoleDbContext>(new Devtalk.EF.CodeFirst.DontDropDbJustCreateTablesIfModelChanged<RoleDbContext>());
+            Database.SetInitializer<SchoolAdminDbContext>(new Devtalk.EF.CodeFirst.DontDropDbJustCreateTablesIfModelChanged<SchoolAdminDbContext>());
+            Database.SetInitializer<SchoolDbContext>(new Devtalk.EF.CodeFirst.DontDropDbJustCreateTablesIfModelChanged<SchoolDbContext>());
+            Database.SetInitializer<StudentDbContext>(new Devtalk.EF.CodeFirst.DontDropDbJustCreateTablesIfModelChanged<StudentDbContext>());
+            Database.SetInitializer<TeacherDbContext>(new Devtalk.EF.CodeFirst.DontDropDbJustCreateTablesIfModelChanged<TeacherDbContext>());
+            Database.SetInitializer<CourseDbContext>(new Devtalk.EF.CodeFirst.DontDropDbJustCreateTablesIfModelChanged<CourseDbContext>());
+            Database.SetInitializer<CourseRegistrationDbContext>(new Devtalk.EF.CodeFirst.DontDropDbJustCreateTablesIfModelChanged<CourseRegistrationDbContext>());
+            Database.SetInitializer<HomeworkStateDbContext>(new Devtalk.EF.CodeFirst.DontDropDbJustCreateTablesIfModelChanged<HomeworkStateDbContext>());
+           */
             
             AreaRegistration.RegisterAllAreas();
             RegisterGlobalFilters(GlobalFilters.Filters);

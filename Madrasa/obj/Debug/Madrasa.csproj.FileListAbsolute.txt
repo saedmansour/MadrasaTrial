@@ -42,3 +42,6 @@ C:\Users\saed\Desktop\MadrasaTrial\Madrasa\bin\he\Resources.resources.dll
 C:\Users\saed\Desktop\MadrasaTrial\Madrasa\obj\Debug\Madrasa.csprojResolveAssemblyReference.cache
 C:\Users\saed\Desktop\MadrasaTrial\Madrasa\obj\Debug\Madrasa.dll
 C:\Users\saed\Desktop\MadrasaTrial\Madrasa\obj\Debug\Madrasa.pdb
+C:\Users\saed\Desktop\MadrasaTrial\Madrasa\bin\Devtalk.EF.CodeFirst.dll
+C:\Users\saed\Desktop\MadrasaTrial\Madrasa\bin\Microsoft.Web.Infrastructure.dll
+C:\Users\saed\Desktop\MadrasaTrial\Madrasa\bin\WebActivator.dll
