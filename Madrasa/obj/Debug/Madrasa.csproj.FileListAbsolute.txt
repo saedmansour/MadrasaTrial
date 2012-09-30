@@ -45,3 +45,5 @@ C:\Users\saed\Desktop\MadrasaTrial\Madrasa\obj\Debug\Madrasa.pdb
 C:\Users\saed\Desktop\MadrasaTrial\Madrasa\bin\Devtalk.EF.CodeFirst.dll
 C:\Users\saed\Desktop\MadrasaTrial\Madrasa\bin\Microsoft.Web.Infrastructure.dll
 C:\Users\saed\Desktop\MadrasaTrial\Madrasa\bin\WebActivator.dll
+C:\Users\saed\Desktop\MadrasaTrial\Madrasa\bin\System.Data.SqlServerCe.dll
+C:\Users\saed\Desktop\MadrasaTrial\Madrasa\bin\System.Web.Providers.dll
